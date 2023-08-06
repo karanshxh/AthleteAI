@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AthleteAI - ShotTracer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Logo -->
+            <div class="logo">
+                <h1>AthleteAI</h1>
+            </div>
+            <!-- Navigation Links -->
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="active">ShotTracer</a></li>
+                <li><a href="chatbot.html">Chatbot</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <section class="main-content">
+        <!-- Left Side (Video Upload) -->
+        <div class="left-side">
+            <h2>Upload Your Video</h2>
+            <p>Use the form below to upload your sports video for shot tracking.</p>
+            <!-- Add your video upload form here -->
+        </div>
+
+        <div class="right-side">
+            <!-- Video Display Area -->
+            <div class="video-display">
+                <video id="videoPlayer" controls>
+                    <source src="" id="videoSource" type="video/mp4">
+                    <!-- Add other video sources if needed, e.g., WebM, Ogg -->
+                </video>
+            </div>
+        
+            <!-- Choose an Option (Mini Menu) -->
+            <h2>Choose an Option</h2>
+            <div class="slider">
+                <div class="slide" id="slide-1"></div>
+                <div class="slide" id="slide-2"></div>
+                <div class="slide" id="slide-3"></div>
+                <div class="slide" id="slide-4"></div>
+                <div class="slide" id="slide-5"></div>
+              </div>
+            <ul class="menu-options">
+                <li><a href="#option1" class="option-link">Option 1</a></li>
+                <li><a href="#option2" class="option-link">Option 2</a></li>
+                <li><a href="#option3" class="option-link">Option 3</a></li>
+                <!-- Add more options as needed -->
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2023 AthleteAI. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript to handle video switching -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const videoPlayer = document.getElementById("videoPlayer");
+            const videoSource = document.getElementById("videoSource");
+            const optionLinks = document.querySelectorAll(".option-link");
+
+            // Add event listeners to each option link
+            optionLinks.forEach(function (link) {
+                link.addEventListener("click", function (event) {
+                    event.preventDefault();
+
+                    // Get the video file based on the clicked option
+                    const selectedOption = link.getAttribute("href").slice(1); // Remove "#" from href
+                    const videoFile = `${selectedOption}.mp4`;
+
+                    // Update video source and play the video
+                    videoSource.setAttribute("src", videoFile);
+                    videoPlayer.load();
+                    videoPlayer.play();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

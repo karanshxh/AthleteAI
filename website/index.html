@@ -1,1 +1,68 @@
+
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AthleteAI - Empowering Athletes with AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Logo -->
+            <div class="logo">
+                <h1>AthleteAI</h1>
+            </div>
+            <!-- Navigation Links -->
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="ShotTracer.html">ShotTracer</a></li>
+                <li><a href="Chatbot.html">Chatbot</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Empowering Athletes with AI</h2>
+            <p>Unlock your full potential with our cutting-edge AI solutions for athletes.</p>
+            <a href="#" class="cta-btn">Get Started</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <h3>Our Services</h3>
+        <div class="feature">
+            <img src="icon1.png" alt="AI Coaching">
+            <h4>AI Coaching</h4>
+            <p>Personalized coaching and performance analysis using AI algorithms.</p>
+        </div>
+        <div class="feature">
+            <img src="icon2.png" alt="Smart Equipment">
+            <h4>Smart Equipment</h4>
+            <p>Discover smart gear and wearables to enhance your training experience.</p>
+        </div>
+        <div class="feature">
+            <img src="icon3.png" alt="Data Insights">
+            <h4>Data Insights</h4>
+            <p>Gain valuable insights from data analytics to optimize your performance.</p>
+        </div>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var currentLocation = window.location.pathname;
+            var links = document.querySelectorAll(".nav-links a");
+            links.forEach(function (link) {
+                if (link.getAttribute("href") === currentLocation) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+    <footer>
+        <p>&copy; 2023 AthleteAI. All rights reserved.</p>
+    </footer>
+</body>
+</html>
