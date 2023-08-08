@@ -18,20 +18,24 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="#" class="active">ShotTracer</a></li>
                 <li><a href="chatbot.html">Chatbot</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="About.html">About Us</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Main Content Section -->
-    <section class="main-content">
+    <section class="shot-tracer-main-content">
         <!-- Left Side (Video Upload) -->
         <div class="left-side">
             <h2>Upload Your Video</h2>
             <p>Use the form below to upload your sports video for shot tracking.</p>
-            <!-- Add your video upload form here -->
+            <form id="videoForm">
+                <button for="videoUpload" class="upload-btn">Choose Video</button>
+                <input type="file" id="videoUpload" accept="video/*">
+                <button type="submit" class="upload-btn">Upload</button>
+            </form>
         </div>
-
+                
         <div class="right-side">
             <!-- Video Display Area -->
             <div class="video-display">
@@ -43,19 +47,12 @@
         
             <!-- Choose an Option (Mini Menu) -->
             <h2>Choose an Option</h2>
-            <div class="slider">
-                <div class="slide" id="slide-1"></div>
-                <div class="slide" id="slide-2"></div>
-                <div class="slide" id="slide-3"></div>
-                <div class="slide" id="slide-4"></div>
-                <div class="slide" id="slide-5"></div>
-              </div>
-            <ul class="menu-options">
-                <li><a href="#option1" class="option-link">Option 1</a></li>
-                <li><a href="#option2" class="option-link">Option 2</a></li>
-                <li><a href="#option3" class="option-link">Option 3</a></li>
-                <!-- Add more options as needed -->
-            </ul>
+                <ul class="menu-options">
+                    <li><a href="#option1" class="option-link">Serve</a></li>
+                    <li><a href="#option2" class="option-link">Forehand</a></li>
+                    <li><a href="#option3" class="option-link">Backhand</a></li>
+                    <!-- Add more options as needed -->
+                </ul>
         </div>
     </section>
 
@@ -88,5 +85,27 @@
             });
         });
     </script>
+
+    <!-- JavaScript to handle video uploading -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const videoForm = document.getElementById("videoForm");
+            const videoUpload = document.getElementById("videoUpload");
+            
+            videoForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                
+                const uploadedFile = videoUpload.files[0];
+                if (uploadedFile) {
+                    // You can process the uploaded file here
+                    console.log("Uploaded file:", uploadedFile.name);
+                    // You might want to send the file to a server for storage
+                } else {
+                    console.log("No file uploaded.");
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

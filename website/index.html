@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,48 +18,30 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="ShotTracer.html">ShotTracer</a></li>
                 <li><a href="Chatbot.html">Chatbot</a></li>
-                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="About.html">About Us</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Empowering Athletes with AI</h2>
+    <main class="main-content">
+        <div class="content-section">
+            <h2>Empowering Athletes with the help of DeepMotion and LanceDB</h2>
             <p>Unlock your full potential with our cutting-edge AI solutions for athletes.</p>
-            <a href="#" class="cta-btn">Get Started</a>
         </div>
-    </section>
 
-    <section class="features">
-        <h3>Our Services</h3>
-        <div class="feature">
-            <img src="icon1.png" alt="AI Coaching">
-            <h4>AI Coaching</h4>
-            <p>Personalized coaching and performance analysis using AI algorithms.</p>
+        <div class="tool-container">
+            <h4>Shot Tracer</h4>
+            <h5>View a 3D model of your swing from every angle compared to professional models</h5>
+            <img src="icon1.png" alt="Shot Tracer" width="300" height="200">
         </div>
-        <div class="feature">
-            <img src="icon2.png" alt="Smart Equipment">
-            <h4>Smart Equipment</h4>
-            <p>Discover smart gear and wearables to enhance your training experience.</p>
+    
+        <div class="tool-container">
+            <h4>AthleteAI</h4>
+            <h5>Talk to a trained AI model to fix your different swings</h5>
+            <img src="icon2.png" alt="AthleteAI" width="300" height="200">
         </div>
-        <div class="feature">
-            <img src="icon3.png" alt="Data Insights">
-            <h4>Data Insights</h4>
-            <p>Gain valuable insights from data analytics to optimize your performance.</p>
-        </div>
-    </section>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var currentLocation = window.location.pathname;
-            var links = document.querySelectorAll(".nav-links a");
-            links.forEach(function (link) {
-                if (link.getAttribute("href") === currentLocation) {
-                    link.classList.add("active");
-                }
-            });
-        });
-    </script>
+    </main>
+    
     <footer>
         <p>&copy; 2023 AthleteAI. All rights reserved.</p>
     </footer>
