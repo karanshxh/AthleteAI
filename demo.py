@@ -141,7 +141,8 @@ def list_jobs():
 download_format = {
     1: 'bvh',
     2: 'fbx',
-    3: 'mp4'
+    3: 'mp4',
+    4: 'glb'
 }
 character_select = {
     1: 'male-young',
@@ -173,12 +174,13 @@ job you want to download.\n""")
     downloadResp = get_response('/download/' + rid)
     downloadRespTxt = downloadResp.text
     downloadRespJson = json.loads(downloadRespTxt)
-    print(downloadRespJson)
+    #print(downloadRespJson)
     if downloadRespJson['count'] > 0:
         urls = downloadRespJson['links'][0]['urls']
         for fileUrl in urls:
             files = fileUrl['files']
             for file in files:
+                print(file)
                 if 'bvh' in file:
                     uri = file['bvh']
                     dowloadResp = session.get(uri)
@@ -197,6 +199,13 @@ job you want to download.\n""")
                     with open(dPath + 'mp4', 'wb') as f:
                         f.write(dowloadResp.content)
                         print('\nFile saved to ' + dPath + 'mp4')
+                if 'glb' in file:
+                    print("here")
+                    uri = file['glb']
+                    dowloadResp = session.get(uri)
+                    with open(dPath + 'zip', 'wb') as f:
+                        f.write(dowloadResp.content)
+                        print('\nFile saved to ' + dPath + 'zip')
 
     print('')
     main_options()
@@ -229,14 +238,16 @@ def new_job():
     1) BVH
     2) FBX
     3) MP4
-    4) All\n""")
+    4) GLB
+    5) All\n""")
     formatSelection = int(input('Input format number: '))
     formatProcess = ''
-    if formatSelection != 4:
+    if formatSelection != 5:
         formatSel = download_format[formatSelection]
         formatProcess = "formats=" + formatSel
+        print(formatProcess)
     else:
-        formatProcess = "formats=bvh,fbx,mp4"
+        formatProcess = "formats=bvh,fbx,mp4,glb"
 
     headerContent = {'Content-length': str(len(vFile)), 'Content-type': 'application/octet-stream'}
     vPath = os.path.basename(fullPath)

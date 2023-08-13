@@ -21,6 +21,8 @@ def parse_user_credentials():
     parser.add_argument('credentials', 
         nargs='?', type=check_json, 
         help='A JSON file must be specified')
+
+    parser.add_argument('video', type=str, help='A video file must be specified')
     args = parser.parse_args()
     return args.credentials
 
@@ -42,12 +44,37 @@ def get_session():
         return session
     else:
         print('Failed to authenticate ' + str(request.status_code) + '\n')
-        main_options()
+
+def get_response(urlPath):
+    respUrl = _apiServerUrl + urlPath
+    resp = session.get(respUrl)
+    if resp.status_code == 200:
+        return resp
+    else:
+        print('Failed to contact server ' + resp.status_code + '\n')
+
+def list_successes():
+    successes = json.loads(get_response('/list/SUCCESS').text)
+    return successes
 
 
 def main():
     read_user_credentials(args)
+    print(list_successes())
+
 
 if __name__ == "__main__":
     args = parse_user_credentials()
     main()
+
+    curr_path = os.path.abspath(os.path.dirname(__file__))
+    input_path = "inputs/KaranBadminton.MOV"
+    full_path = os.path.normpath(os.path.join(curr_path, input_path))
+
+    v_file = None
+    with open(full_path, 'rb') as f:
+        v_file = f.read()
+    if v_file == None:
+        raise argparse.ArgumentParserError('Could not read %r.' % full_path)
+
+    

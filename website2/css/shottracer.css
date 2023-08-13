@@ -1,0 +1,120 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    background-color: #2F4858;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: #2F4858;
+}
+
+.nav-bar-item {
+    margin: 1rem;
+}
+
+.body-text {
+    font-family: roboto;
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+}
+
+#nav-athlete {
+    margin: 1rem 0 1rem 1rem
+}
+
+#nav-ai {
+    margin: 1rem auto 1rem 0;
+    color: #86BBD8;
+}
+
+.title-text {
+    font-family: roboto;
+    font-size: 3rem;
+    color: white;
+
+    height: 5rem;
+    width: 100%;
+    text-align: center;
+}
+
+#card-section {
+    display: flex;
+    flex-direction: row;
+
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: white;
+
+    min-width: 40%;
+    max-width: 40%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    border-radius: 2rem;
+}
+
+#trainee-card {
+    padding: 1rem;
+}
+
+#coach-card {
+    padding: 1rem;
+}
+
+.card-text {
+    font-family: roboto;
+    color: #2F4858;
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-thickness: 0.2rem;
+}
+
+.card-input {
+    border: 0;
+    background-color: #2F4858;
+    color: white;
+    min-width: 8rem;
+
+    font-size: 1rem;
+    font-family: roboto;
+    width: 10rem;
+    text-align: center;
+    padding: 1rem;
+    
+    margin: 0 auto 0 auto;
+
+    cursor: pointer;
+}
+
+#upload-trainee-input {
+    display: none;
+}
+
+.uploaded-video {
+    text-align: center;
+    margin: 1rem 0rem 1rem 0rem;
+
+    max-width: 50%;
+
+    max-height: 60%;
+}
+
+#trainee-video {
+}
