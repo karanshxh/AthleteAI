@@ -47,7 +47,6 @@ def get_session():
         return session
     else:
         print('Failed to authenticate ' + str(request.status_code) + '\n')
-        main_options()
 
 
 def get_response(urlPath):
@@ -57,7 +56,6 @@ def get_response(urlPath):
         return resp
     else:
         print('Failed to contact server ' + resp.status_code + '\n')
-        main_options()
 
 
 def print_list_portion(inputList, nameDelim, idDelim, timeDelim, currPos):
@@ -105,50 +103,11 @@ def call_print_list_portion(inputList, nameDelim, idDelim='', timeDelim=''):
         currPos = listStatus[0]
 
 
-def list_models():
-    print('')
-    respText = get_response('/character/listModels').text
-    jsonResp = json.loads(respText)
-    call_print_list_portion(jsonResp['list'], 'name', 'id')
-    print('')
-    main_options()
-
 
 def get_job_list(listPath):
     respText = get_response(listPath).text
     jsonResp = json.loads(respText)
     return jsonResp
-
-
-def list_jobs():
-    print("""\n=== Job Status List Filter ===
-    1) IN PROGRESS
-    2) SUCCEEDED
-    3) FAILED
-    4) ALL\n""")
-    selection = int(input('Select option number from the list: '))
-    print('')
-    jobList = []
-
-    if selection == 1 or selection == 4:
-        jsonResp = get_job_list('/list/PROGRESS')
-        print('Jobs in progress: ' + str(jsonResp['count']))
-        jobList += jsonResp['list']
-
-    if selection == 2 or selection == 4:
-        jsonResp = get_job_list('/list/SUCCESS')
-        print('Jobs succeeded: ' + str(jsonResp['count']))
-        jobList += jsonResp['list']
-
-    if selection == 3 or selection == 4:
-        jsonResp = get_job_list('/list/FAILURE')
-        print('Jobs failed: ' + str(jsonResp['count']))
-        jobList += jsonResp['list']
-
-    call_print_list_portion(sorted(jobList, key=lambda x: x['ctime'], reverse=True), 'fileName', 'rid', 'ctime')
-
-    print('')
-    main_options()
 
 
 download_format = {
@@ -218,7 +177,7 @@ def download_job(file_path, fileRid):
                     #st.video(uri, format="video/mp4", start_time=0)
                     dowloadResp = session.get(uri)
                     st.video(dowloadResp.content, format="video/mp4", start_time=0)
-    print('')
+    return downloadResp.content
 
 
 def new_job():
@@ -227,7 +186,6 @@ def new_job():
     file_name = os.path.basename(inputPath)
     fullPath = os.path.normpath(os.path.join(currPath, inputPath))
     print(fullPath)
-    vFile = None
     if not os.path.exists(fullPath):
         raise argparse.ArgumentTypeError('Filename %r doesn\'t exist.' % fullPath)
     with open(fullPath, 'rb') as f:
@@ -294,96 +252,8 @@ def new_job():
     print('')
     download_job(file_name, pRespJson['rid'])
 
-def upload_character():
-    currPath = os.path.abspath(os.path.dirname(__file__))
-    cInputPath = input('Input relative path of character model to upload: ')
-    cFullPath = os.path.normpath(os.path.join(currPath, cInputPath))
-    cFile = None
-    if not os.path.exists(cFullPath):
-        raise argparse.ArgumentTypeError('Filename %r doesn\'t exist.' % cFullPath)
-    with open(cFullPath, 'rb') as f:
-        cFile = f.read()
-        f.close()
-    if cFile == None:
-        raise argparse.ArgumentTypeError('Could not read %r.' % cFullPath)
-    cHeader = {'Content-Length': str(len(cFile)), 'Content-Type': 'application/octet-stream'}
-
-    cFName, cExt = os.path.splitext(os.path.basename(cFullPath))
-    uploadingUrl = _apiServerUrl + '/character/getModelUploadUrl?name=' + cFName + '&modelExt=' + cExt[
-                                                                                                  1:] + '&resumable=0'
-    resp = session.get(uploadingUrl)
-    if resp.status_code == 200:
-        jsonResp = json.loads(resp.text)
-        gcsModelUrl = jsonResp['modelUrl']
-        cUploadResp = session.put(gcsModelUrl, headers=cHeader, data=cFile)
-        if cUploadResp.status_code == 200:
-            print('Uploaded model ' + cFName)
-        else:
-            print('Failed to upload model')
-            main_options()
-        storeUrl = _apiServerUrl + '/character/storeModel'
-        storeCfg = {
-            "modelId": None,
-            "modelUrl": gcsModelUrl,
-            "thumbUrl": None,
-            "modelName": cFName
-        }
-        storeResp = session.post(storeUrl, json=storeCfg)
-        if storeResp.status_code == 200:
-            print('Successfully stored model ' + json.loads(storeResp.text)['modelId'])
-        else:
-            print('Failed to store model')
-    else:
-        print('Failed to contact API server for upload.')
-
-    print('')
-    main_options()
-
-
-def check_minutes_balance():
-    respText = get_response('/account/creditBalance').text
-    jsonResp = json.loads(respText)
-    print(jsonResp['credits'])
-
-    print('')
-    main_options()
-
-
-mainOptions = {
-    1: list_models,
-    2: list_jobs,
-    3: download_job,
-    4: new_job,
-    5: upload_character,
-    6: check_minutes_balance,
-    7: exit
-}
-
-
-def main_options():
-    st.write("""=== OPTIONS ===
-    1) List Models
-    2) List Jobs
-    3) Download Completed Job
-    4) Start New Job
-    5) Upload Custom Character
-    6) Check Minutes Balance
-    7) Exit\n""")
-    selection = st.text_input('Select option number from the list: ')
-    #selection = int(input('Select option number from the list: '))
-    if selection:
-        mainOptions[int(selection)]()
-
-
-def main():
-    read_user_credentials(args)
-    mainOptions[4]()
-    #main_options()
-
-
 if __name__ == '__main__':
-    tab1, tab2 = st.tabs(["Motion Tracking", "Motion Insight"])
-
     args = parse_user_credentials()
-    main()
+    read_user_credentials(args)
+    new_job()
 
