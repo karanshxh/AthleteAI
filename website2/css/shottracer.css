@@ -116,5 +116,15 @@ body, html {
     max-height: 60%;
 }
 
-#trainee-video {
+.card-button {
+    border: 0;
+    background-color: #2F4858;
+    color: white;
+    min-width: 8rem;
+
+    font-size: 1rem;
+    font-family: roboto;
+    padding: 1rem;
+
+    cursor: pointer;
 }

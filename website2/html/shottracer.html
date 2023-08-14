@@ -33,13 +33,22 @@
                 <label for="upload-trainee-input" class="card-input">upload video</label>
                 <input type="file" accept="video/*" id="upload-trainee-input" />
 
-                <video controls autoplay muted class="uploaded-video" id="trainee-video">
+                <video autoplay muted preload="none" class="uploaded-video" id="trainee-video">
                     <source src="" id="trainee-source" type="video/mp4">
                 </video>
             </div>
 
             <div class="card" id="coach-card">
                 <h1 class="card-text">coach video</h1>
+
+                <div>
+                    <button class="card-button" id="show-serve-button">tennis serve</button>
+                    <button class="card-button" id="show-tt-button">table tennis</button>
+                </div>
+
+                <video autoplay muted preload="none" class="uploaded-video" id="coach-video">
+                    <source src="" id="coach-source" type="video/mp4">
+                </video>
             </div>
         </div>
     </body>
