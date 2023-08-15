@@ -4,19 +4,19 @@
     <head>
         <title>About AthleteAI</title>
 
-        <link rel="stylesheet" type="text/css" href="../css/about.css">
+        <link rel="stylesheet" type="text/css" href="../static/about.css">
         <link rel="stylesheet" href="https://use.typekit.net/uug3sib.css">
 
         <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-        <script src="js/about.js" type="module"></script>
+        <script src="../static/about.js" type="module"></script>
     </head>
 
     <body>
         <div id="nav-bar">
-            <p class="nav-bar-item body-text" id="nav-home"><a href="../home.html" class="body-text nav-link">home</a></p>
-            <p class="nav-bar-item body-text" id="nav-shot-tracer"><a href="shottracer.html" class="body-text nav-link">shot tracer</a></p>
+            <p class="nav-bar-item body-text" id="nav-home"><a href="{{ url_for('home') }}" class="body-text nav-link">home</a></p>
+            <p class="nav-bar-item body-text" id="nav-shot-tracer"><a href="{{ url_for('shottracer') }}" class="body-text nav-link">shot tracer</a></p>
             <p class="nav-bar-item body-text" id="nav-about"><a href="#" class="body-text nav-link">about</a></p>
         </div>
     </body>

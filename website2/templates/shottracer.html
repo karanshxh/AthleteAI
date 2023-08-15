@@ -4,26 +4,27 @@
     <head>
         <title>Shot Tracer</title>
 
-        <link rel="stylesheet" type="text/css" href="../css/shottracer.css">
+        <link rel="stylesheet" type="text/css" href="../static/shottracer.css">
         <link rel="stylesheet" href="https://use.typekit.net/uug3sib.css">
 
         <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-        <script src="../js/shottracer.js" type="module"></script>
+        <script src="../static/shottracer.js" type="module"></script>
     </head>
 
     <body>
         <div id="nav-bar">
-            <p class="nav-bar-title body-text" id="nav-athlete"><a href="../home.html" class="body-text nav-link">athlete</a></p>
-            <p class="nav-bar-title body-text" id="nav-ai"><a href="../home.html" class="body-text nav-link" id="nav-ai">AI</a></p>
-            <p class="nav-bar-item body-text" id="nav-home"><a href="../home.html" class="body-text nav-link">home</a></p>
+            <p class="nav-bar-title body-text" id="nav-athlete"><a href="{{ url_for('home') }}" class="body-text nav-link">athlete</a></p>
+            <p class="nav-bar-title body-text" id="nav-ai"><a href="{{ url_for('home') }}" class="body-text nav-link" id="nav-ai">AI</a></p>
+            <p class="nav-bar-item body-text" id="nav-home"><a href="{{ url_for('home') }}" class="body-text nav-link">home</a></p>
             <p class="nav-bar-item body-text" id="nav-shot-tracer"><a href="#" class="body-text nav-link">shot tracer</a></p>
-            <p class="nav-bar-item body-text" id="nav-about"><a href="about.html" class="body-text nav-link">about</a></p>
+            <p class="nav-bar-item body-text" id="nav-about"><a href="{{ url_for('about') }}" class="body-text nav-link">about</a></p>
         </div>
 
         <div id="title">
             <h1 class="title-text">shot tracer</h1>
+            <h1 id="output"></h1>
         </div>
 
         <div id="card-section">
@@ -31,7 +32,10 @@
                 <h1 class="card-text">trainee video</h1>
 
                 <label for="upload-trainee-input" class="card-input">upload video</label>
-                <input type="file" accept="video/*" id="upload-trainee-input" />
+                
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" accept="video/*" id="upload-trainee-input" name="file" />
+                </form>
 
                 <video autoplay muted preload="none" class="uploaded-video" id="trainee-video">
                     <source src="" id="trainee-source" type="video/mp4">
@@ -49,6 +53,17 @@
                 <video autoplay muted preload="none" class="uploaded-video" id="coach-video">
                     <source src="" id="coach-source" type="video/mp4">
                 </video>
+            </div>
+        </div>
+
+        <div class="card" id="convert-card">
+            <button class="card-button">convert</button>
+        </div>
+
+        <div>
+            <div class="card" id="chat-card">
+                <div ></div>
+
             </div>
         </div>
     </body>

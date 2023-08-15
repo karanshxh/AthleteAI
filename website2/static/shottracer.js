@@ -27,14 +27,54 @@ function handleTraineeInput() {
     traineeVideo.setAttribute("controls", "controls");
     traineeVideo.load();
     traineeVideo.play();
+
+    console.log(traineeFile);
+
+    $.ajax({
+        url: '/process',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({"value": traineeFile["name"]}),
+        success: function(response) {
+            $("#output").text(response.result);
+            console.log(response.result);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
 }
 
 function handleShowTennisServe() {
-    handleShowCoachVideo("../videos/TennisSwing.mp4");
+    handleShowCoachVideo("static/videos/TennisSwing.mp4");
 }
 
 function handleShowTableTennis() {
-    handleShowCoachVideo("../videos/TableTennis.mp4");
+    handleShowCoachVideo("static/videos/TableTennis.mp4");
+}
+
+/*
+function handleTraineeInput() {
+    const traineeFile = this.files[0];
+    console.log(traineeFile);
+
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const dataURL = event.target.result;
+
+        traineeVideo.pause();
+        traineeSource.setAttribute('src', dataURL);
+        traineeSource.setAttribute('type', traineeFile.type);
+
+        console.log(dataURL);
+
+        traineeVideo.setAttribute("controls", "controls");
+        traineeVideo.load();
+        traineeVideo.play();
+    };
+
+    reader.readAsDataURL(traineeFile);
 }
 
 function handleShowCoachVideo(video_url) {
@@ -45,4 +85,4 @@ function handleShowCoachVideo(video_url) {
     coachSource.setAttribute("controls", "controls");
     coachVideo.load();
     coachVideo.play();
-}
+}*/

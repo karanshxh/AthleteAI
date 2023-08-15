@@ -72,10 +72,14 @@ body, html {
 
 #trainee-card {
     padding: 1rem;
+
+    min-height: 60rem;
 }
 
 #coach-card {
     padding: 1rem;
+    
+    min-height: 60rem;
 }
 
 .card-text {
@@ -127,4 +131,12 @@ body, html {
     padding: 1rem;
 
     cursor: pointer;
+}
+
+#chat-card {
+    width: 100%;
+}
+
+#convert-card {
+    min-height: 15rem;
 }
