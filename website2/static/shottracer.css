@@ -82,6 +82,13 @@ body, html {
     min-height: 60rem;
 }
 
+#QA-card {
+    padding: 1rem;
+
+    min-height: 30rem;
+}
+
+
 .card-text {
     font-family: roboto;
     color: #2F4858;

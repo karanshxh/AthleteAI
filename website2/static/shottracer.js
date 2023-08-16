@@ -7,10 +7,14 @@ const coachVideo = document.getElementById("coach-video");
 
 const showTennisServe = document.getElementById("show-serve-button");
 const showTableTennis = document.getElementById("show-tt-button");
+const docSearchInput = document.getElementById("input-question");
+const docSearchButton = document.getElementById("ask-button");
 
 traineeInput.addEventListener("change", handleTraineeInput, false);
 showTennisServe.addEventListener("click", handleShowTennisServe, false);
 showTableTennis.addEventListener("click", handleShowTableTennis, false);
+docSearchButton.addEventListener("click", handleDocSearch, false);
+console.log("Loaded");
 
 function handleTraineeInput() {
     const traineeFile = this.files[0];
@@ -46,11 +50,31 @@ function handleTraineeInput() {
 }
 
 function handleShowTennisServe() {
+    console.log("Tennis Serve");
     handleShowCoachVideo("static/videos/TennisSwing.mp4");
 }
 
 function handleShowTableTennis() {
     handleShowCoachVideo("static/videos/TableTennis.mp4");
+}
+
+function handleDocSearch() {
+    console.log("Doc Search");
+    console.log(docSearchInput.value);
+
+    $.ajax({
+        url: '/search',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({"question": docSearchInput.value}),
+        success: function(response) {
+            $("#generatedText").text(response.result);
+            console.log(response.result);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
 }
 
 /*
@@ -75,7 +99,7 @@ function handleTraineeInput() {
     };
 
     reader.readAsDataURL(traineeFile);
-}
+}*/
 
 function handleShowCoachVideo(video_url) {
     coachVideo.pause();
@@ -85,4 +109,4 @@ function handleShowCoachVideo(video_url) {
     coachSource.setAttribute("controls", "controls");
     coachVideo.load();
     coachVideo.play();
-}*/
+}
