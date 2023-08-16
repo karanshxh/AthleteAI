@@ -126,31 +126,20 @@ function handleConvertClick() {
             console.log('converting');
 
             
-        var iframe = document.getElementById( 'trainee-fbx' );
-        var uid = response[0];
+        console.log(response)
+        console.log(typeof response)
+        var response_json = JSON.parse(response)
+        console.log(response_json)
+        var iframe = document.getElementById("trainee-fbx");
+        iframe.src = "https://sketchfab.com/models/" + response_json.trainee + "/embed";
 
-        // By default, the latest version of the viewer API will be used.
-        var client = new Sketchfab( iframe );
+        var coach_iframe = document.getElementById("coach-fbx");
+        coach_iframe.src = "https://sketchfab.com/models/" + response_json.coach + "/embed";
 
-        // Alternatively, you can request a specific version.
-        // var client = new Sketchfab( '1.12.1', iframe );
-
-        client.init( uid, {
-            success: function onSuccess( api ){
-                api.start();
-                api.addEventListener( 'viewerready', function() {
-                    console.log( 'Viewer is ready' );
-
-                } );
-            },
-            error: function onError() {
-                console.log( 'Viewer error' );
-            }
-        });
-            },
-            error: function(error) {
-                console.log(error);
-            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
     });
 }
 

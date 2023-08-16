@@ -146,8 +146,30 @@ body, html {
 #convert-card {
     display: flex;
     flex-direction: column;
-    min-height: 15rem;
+    min-height: 50rem;
 
+    margin-top: 10%;
     margin-right: 20%;
     margin-left: 20%;
+}
+
+#frames {
+    display: flex;
+    flex-direction: row;
+    padding-top: 3rem;
+    margin-right: 20%;
+    margin-left: 20%;
+}
+
+iframe {
+    width: 25rem;
+    height: 25rem;
+}
+
+#question-title {
+    font-size: 2rem;
+}
+
+#input_question {
+    padding-top: 10%;
 }

@@ -20,8 +20,8 @@ from sketchfab import SketchfabHandler
 
 
 
-os.environ["OPENAI_API_KEY"] = "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"
-openai.api_key = "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"
+os.environ["OPENAI_API_KEY"] = "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"
+openai.api_key = "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"
 
 
 
@@ -119,7 +119,6 @@ def coach_select():
 @app.route('/convert', methods=["POST"])
 def convert():
     print("converting", flush=True)
-
     if current_convert_config["trainee_url"] == "" or current_convert_config["coach_url"] == "":
         print(current_convert_config)
         return current_convert_config
@@ -145,7 +144,9 @@ def convert():
     while not sketchfab_handler.poll_processing_status(trainee_url) or not sketchfab_handler.poll_processing_status(coach_url):
         time.sleep(1)
 
-    return [trainee_url.rsplit('/', 1)[-1], coach_url.rsplit('/', 1)[-1]]
+    return jsonify('{"trainee": "' + trainee_url.rsplit('/', 1)[-1] + '", "coach": "' + coach_url.rsplit('/', 1)[-1] + '"}')
+    #return jsonify('{"trainee": "791e22a2678e4e05b56df1107dd1f8e8", "coach": "af8a9327edf3432f981000210da42022"}')
+    #return (trainee_url.rsplit('/', 1)[-1], coach_url.rsplit('/', 1)[-1])
 
 
 @app.route("/search", methods=["POST"])
@@ -165,7 +166,7 @@ def docSearch():
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
-        max_tokens=100
+        max_tokens=300
     )
 
     generated_text = response.choices[0].text

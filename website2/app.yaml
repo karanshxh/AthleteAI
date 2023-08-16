@@ -9,4 +9,4 @@ handlers:
   script: auto
 
 resources:
-  memory_gb: 4
+  memory_gb: 5

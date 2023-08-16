@@ -60,15 +60,17 @@
             <h1 class="card-text">convert to 3D overlay</h1>
             <button class="card-button" id="convert-button">convert</button>
 
-            <iframe src="" id="trainee-fbx" allow="autoplay; fullscreen; xr-spatial-tracking" execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-            <iframe src="" id="coach-fbx" allow="autoplay; fullscreen; xr-spatial-tracking" execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            <div id="frames">
+                <iframe id="trainee-fbx" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/791e22a2678e4e05b56df1107dd1f8e8/embed"> </iframe>
+                <iframe id="coach-fbx" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/791e22a2678e4e05b56df1107dd1f8e8/embed"> </iframe>
+            </div>
         </div>
 
             <!-- Adding label and text input for "Question:" -->
             <div class="card" id="QA-card">
-                <label for="input-question">Question:</label>
+                <label class="card-text" id="question-title" for="input-question">Question:</label>
                 <input type="text" id="input-question" name="question" placeholder="Enter your question" style="width: 200px;">
-                <button id="ask-button">Ask</button>
+                <button class="card-button" id="ask-button">Ask</button>
                 <textarea id="generatedText" rows="4" cols="50" readonly style="width: 300px; height: 300px;"></textarea>
             </div>
         </div>
