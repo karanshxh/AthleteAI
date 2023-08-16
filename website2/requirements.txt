@@ -1,0 +1,8 @@
+Flask==2.1.0
+requests
+langchain
+lancedb
+openai
+pdf2image
+pdfminer.six
+unstructured
