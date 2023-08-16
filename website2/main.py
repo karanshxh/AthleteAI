@@ -15,17 +15,14 @@ import openai
 from flask import Flask, render_template, request, jsonify
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from werkzeug.utils import secure_filename
-
-<<<<<<< HEAD
-os.environ["OPENAI_API_KEY"] = "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"
-openai.api_key = "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"
-=======
 from deep_motion import DeepMotionHandler
 from sketchfab import SketchfabHandler
 
-os.environ["OPENAI_API_KEY"] = "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"
-openai.api_key = "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"
->>>>>>> 323598a121e41dd3b6f065742568eb04930e8170
+
+
+os.environ["OPENAI_API_KEY"] = "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"
+openai.api_key = "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"
+
 
 
 
