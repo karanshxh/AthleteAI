@@ -29,6 +29,21 @@ function handleTraineeInput() {
     console.log(uploadTraineeURL);
     console.log(traineeFile["type"]);
 
+    const formData = new FormData();
+    formData.append('file', traineeFile, 'uploaded_video.mp4');
+
+    fetch('/upload', {
+    method: 'POST',
+    body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+    console.log('Upload successful:', data);
+    })
+    .catch(error => {
+    console.error('Error uploading:', error);
+    });
+
     traineeVideo.pause();
     traineeSource.setAttribute('src', uploadTraineeURL);
     traineeSource.setAttribute('type', traineeFile["type"]);

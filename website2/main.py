@@ -24,7 +24,7 @@ openai.api_key = "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"
 
 
 
-loader = DirectoryLoader("../langchain_documents/")
+loader = DirectoryLoader("static/langchain_documents/")
 
 loaded_documents = loader.load()
 text_splitter = CharacterTextSplitter(chunk_size=300, chunk_overlap=100)
@@ -33,7 +33,7 @@ documents = text_splitter.split_documents(loaded_documents)
 print(type(documents))
 embeddings = OpenAIEmbeddings()
 
-db = lancedb.connect("../lanceDB")
+db = lancedb.connect("static/lanceDB")
 table = db.open_table("my_table")
 #
 # table = db.create_table(
@@ -71,6 +71,21 @@ def shottracer():
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+@app.route("/upload", methods=["POST"])
+def upload():
+    print("Entered upload", flush=True)
+    try:
+        uploaded_file = request.files['file']
+        if uploaded_file and uploaded_file.filename.endswith('.mp4'):
+            print("uploaded file and is mp4", flush=True)
+            uploaded_file.save('uploaded_video.mp4')
+            return {'message': 'Video uploaded and saved successfully'}
+        else:
+            print("failed lmao", flush=True)
+            return {'message': 'Invalid video file'}
+    except Exception as e:
+        return {'message': 'Error uploading video: ' + str(e)}
 
 @app.route('/process', methods=['POST'])
 def process():
