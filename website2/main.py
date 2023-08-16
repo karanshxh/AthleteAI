@@ -14,8 +14,8 @@ from flask import Flask, render_template, request, jsonify
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from werkzeug.utils import secure_filename
 
-os.environ["OPENAI_API_KEY"] = "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"
-openai.api_key = "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"
+os.environ["OPENAI_API_KEY"] = "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"
+openai.api_key = "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"
 
 
 
