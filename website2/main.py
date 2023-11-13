@@ -20,8 +20,8 @@ from sketchfab import SketchfabHandler
 
 
 
-os.environ["OPENAI_API_KEY"] = "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"
-openai.api_key = "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"
+os.environ["OPENAI_API_KEY"] = "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"
+openai.api_key = "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"
 
 
 
